@@ -8,6 +8,8 @@ There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 Find the product abc.
 """
 
+import timer
+
 # Rearrange!
 # [1] a^2 + b^2 - c^2 = 0
 # [1] c^2 = a^2 + b^2
@@ -25,11 +27,15 @@ Find the product abc.
 # Now: use b to find a
 # Then: c = 1000 - a - b
 
-for b in range(500):
-    a=1000*(b-500)/(b-1000)
-    c=1000-a-b
-    if a<b and b<c and a*a+b*b==c*c: 
-        print a,b,c,a*b*c
-        break
+@timer.many(10000)
+def main():
+    for b in range(500):
+        a = 1000 * (b - 500) / (b - 1000)
+        c = 1000 - a - b
+        if a < b and b < c and a * a + b * b == c * c:
+            return a * b * c
+
+main()
 
 # 31875000
+# 0.0639ms

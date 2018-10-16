@@ -7,6 +7,8 @@ The product of these numbers is 26 * 63 * 78 * 14 = 1788696.
 What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20*20 grid?
 """
 
+import timer
+
 g = [
     [8, 02, 22, 97, 38, 15, 00, 40, 00, 75, 04, 05, 07, 78, 52, 12, 50, 77, 91, 8],
     [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 04, 56, 62, 00],
@@ -30,11 +32,16 @@ g = [
     [01, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 01, 89, 19, 67, 48]
 ]
 
-print max(
-    max([g[y][x]*g[y+1][x]*g[y+2][x]*g[y+3][x] for x in range(20) for y in range(17)]),
-    max([g[y][x]*g[y][x+1]*g[y][x+2]*g[y][x+3] for x in range(17) for y in range(20)]),
-    max([g[y][x]*g[y-1][x+1]*g[y-2][x+2]*g[y-3][x+3] for x in range(17) for y in range(3, 20)]),
-    max([g[y][x]*g[y+1][x+1]*g[y+2][x+2]*g[y+3][x+3] for x in range(17) for y in range(17)])
-)
+@timer.many(1000)
+def main():
+    return max(
+        max([g[y][x]*g[y+1][x]*g[y+2][x]*g[y+3][x] for x in range(20) for y in range(17)]),
+        max([g[y][x]*g[y][x+1]*g[y][x+2]*g[y][x+3] for x in range(17) for y in range(20)]),
+        max([g[y][x]*g[y-1][x+1]*g[y-2][x+2]*g[y-3][x+3] for x in range(17) for y in range(3, 20)]),
+        max([g[y][x]*g[y+1][x+1]*g[y+2][x+2]*g[y+3][x+3] for x in range(17) for y in range(17)])
+    )
+
+main()
 
 # 70600674
+# 0.3960ms

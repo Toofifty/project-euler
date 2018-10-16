@@ -12,8 +12,13 @@ Hence the difference between the sum of the squares of the first ten natural num
 Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 """
 
-s1 = sum([i*i for i in range(100 + 1)])
-s2 = sum([i for i in range(100 + 1)])
-print s2*s2,'-',s1,'=',s2*s2-s1
+import timer
+
+@timer.many(1000)
+def main():
+    return sum(i for i in range(100 + 1)) ** 2 - sum([i*i for i in range(100 + 1)])
+
+main()
 
 # 25164150
+# 0.0110ms
