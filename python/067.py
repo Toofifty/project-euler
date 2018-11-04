@@ -13,20 +13,21 @@ Find the maximum total from top to bottom in triangle.txt (right click and 'Save
 NOTE: This is a much more difficult version of Problem 18. It is not possible to try every route to solve this problem, as there are 299 altogether! If you could check one trillion (1012) routes every second it would take over twenty billion years to check them all. There is an efficient algorithm to solve it. ;o)
 """
 
-import time
+import timer
 
 tri = []
 with open('067_triangle.txt', 'r') as f:
     for line in f.readlines():
         tri.append([int(num) for num in line.split(' ')])
 
-start = time.time()
+@timer.many(100)
+def main():
+    h = tri[-1]
+    for row in range(len(tri) - 2, -1, -1):
+        h = [max(v + h[i], v + h[i + 1]) for i, v in enumerate(tri[row])]
+    return h[0]
 
-h = tri[-1]
-for row in range(len(tri) - 2, -1, -1):
-    h = [max(v + h[i], v + h[i + 1]) for i, v in enumerate(tri[row])]
-
-print h[0], (time.time() - start) * 1000
+main()
 
 # 7273
-# 1.99ms (!!)
+# 0.9079ms
